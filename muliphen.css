@@ -38,6 +38,9 @@ path.muliphen-box.third {
 path.muliphen-box.fourth {
   animation-delay: 2.5s;
   -webkit-animation-delay: 2.5s;
+  animation: blink-animation-to-fourth 3s steps(5, start) 1;
+  -webkit-animation: blink-animation-to-fourth 3s steps(5, start) 1;
+  animation-fill-mode: forwards;
 }
 
 path.muliphen-box.fifth {
@@ -50,13 +53,13 @@ path.muliphen-box.fifth {
 
 @keyframes blink-animation {
   to {
-    fill: rgba(245, 217, 21, 0.5);
+    fill: rgba(245, 217, 21, 0.7);
   }
 }
 
 @-webkit-keyframes blink-animation {
   to {
-    fill: rgba(245, 217, 21, 0.5);
+    fill: rgba(245, 217, 21, 0.7);
   }
 }
 
@@ -74,23 +77,34 @@ path.muliphen-box.fifth {
 
 @keyframes blink-animation-to-third {
   to {
-    fill: rgba(245, 217, 21, 0.3);
+    fill: rgba(245, 217, 21, 0.2);
   }
 }
 
 @-webkit-keyframes blink-animation-to-third {
   to {
-    fill: rgba(245, 217, 21, 0.3);
+    fill: rgba(245, 217, 21, 0.2);
   }
 }
 
+@keyframes blink-animation-to-fourth {
+  to {
+    fill: rgba(245, 217, 21, 0.4);
+  }
+}
+
+@-webkit-keyframes blink-animation-to-fourth {
+  to {
+    fill: rgba(245, 217, 21, 0.4);
+  }
+}
 @font-face {
-  font-family: "roboto mono";
+  font-family: 'roboto mono';
   src: url(fonts/roboto_mono/RobotoMono-Regular.ttf);
 }
 
 @font-face {
-  font-family: "roboto mono light";
+  font-family: 'roboto mono light';
   src: url(fonts/roboto_mono/RobotoMono-Light.ttf);
 }
 
@@ -133,7 +147,7 @@ section.contact {
 }
 
 .contact-details {
-  font-family: "roboto mono light";
+  font-family: 'roboto mono light';
   position: absolute;
   bottom: 10px;
   left: 20px;
@@ -177,4 +191,14 @@ section.contact {
   font-size: 10px;
   bottom: 0;
   right: 10px;
+}
+
+section.background {
+  position: fixed;
+  top: 0;
+  left: 55%;
+  overflow: hidden;
+  width: 100vw;
+  height: 50vw;
+  z-index: -1;
 }

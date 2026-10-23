@@ -1,0 +1,106 @@
+::selection {
+  background: var(--soft);
+  color: var(--bg);
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--bg);
+}
+.flock {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .text-link b {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .text-link:hover b {
+    transform: translate(2px, -2px);
+  }
+
+  @supports (animation-timeline: view()) {
+    @keyframes progress {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @keyframes develop {
+      from {
+        clip-path: inset(0 0 100% 0);
+      }
+      to {
+        clip-path: inset(0);
+      }
+    }
+    @keyframes drift {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(80px);
+      }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto;
+      height: 2px;
+      background: var(--blue);
+      transform-origin: left;
+      z-index: 10;
+      animation: progress linear both;
+      animation-timeline: scroll(root);
+    }
+
+    .hero {
+      view-timeline: --hero block;
+      overflow: clip;
+    }
+    .hero-art {
+      animation: drift linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+
+    .principles article > * {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+    .principles article:nth-child(2) > * {
+      animation-range: entry 8% entry 63%;
+    }
+    .principles article:nth-child(3) > * {
+      animation-range: entry 16% entry 71%;
+    }
+
+    .portrait img {
+      animation: develop linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+    .about-copy {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 60%;
+    }
+  }
+}

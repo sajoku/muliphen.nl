@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="p1" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(43)">
+      <circle cx="1.5" cy="1.5" r="1" fill="#8EA5FF" opacity=".62"/>
+      <circle cx="5.5" cy="5.5" r=".55" fill="#B8C6FF" opacity=".32"/>
+    </pattern>
+    <pattern id="p2" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(-43)">
+      <circle cx="3" cy="3" r=".75" fill="#6B8DFF" opacity=".5"/>
+    </pattern>
+    <radialGradient id="field">
+      <stop offset="0" stop-color="white" stop-opacity=".95"/>
+      <stop offset=".42" stop-color="white" stop-opacity=".6"/>
+      <stop offset="1" stop-color="black" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="fade">
+      <rect width="800" height="600" fill="black"/>
+      <ellipse cx="590" cy="255" rx="330" ry="300" fill="url(#field)" transform="rotate(-28 590 255)"/>
+      <ellipse cx="320" cy="420" rx="240" ry="190" fill="url(#field)" transform="rotate(-28 320 420)" opacity=".55"/>
+    </mask>
+    <filter id="warp" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".018 .035" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g mask="url(#fade)" filter="url(#warp)">
+    <rect width="800" height="600" fill="url(#p1)"/>
+    <rect width="800" height="600" fill="url(#p2)" opacity=".8"/>
+  </g>
+</svg>

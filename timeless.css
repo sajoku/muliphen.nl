@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Timeless Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/TimelessSansVF.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Timeless Serif";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/TimelessSerifVF.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Timeless Serif";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/TimelessSerifItalicVF.woff2") format("woff2");
+}

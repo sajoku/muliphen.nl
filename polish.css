@@ -1,3 +1,4 @@
+/* Polish: selection, small hover details, flock canvas and scroll animations */
 ::selection {
   background: var(--soft);
   color: var(--bg);
@@ -6,11 +7,43 @@ html {
   scrollbar-width: thin;
   scrollbar-color: var(--muted) var(--bg);
 }
+
+/* overflow: clip hides overflow like "hidden" does, but without making the shell a scroll container.
+   That is cheaper for the browser when something inside animates every frame. */
+.site-shell {
+  overflow: clip;
+}
+
+/* The art is decoration only: let clicks and text selection pass through it to the page */
+.hero-art {
+  pointer-events: none;
+}
+
+/* The flock canvas is a sibling of .hero-art (not inside it), so its animation never forces the
+   art, with its grain filters and blend modes, to be redrawn. It has the same box as .hero-art. */
 .flock {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  right: -4%;
+  top: 0;
+  width: 65%;
   height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  contain: strict;
+}
+@media (max-width: 720px) {
+  .flock {
+    top: 190px;
+    right: -25%;
+    width: 110%;
+    height: 420px;
+    opacity: 0.62;
+  }
+}
+@media (max-width: 720px) and (prefers-color-scheme: light) {
+  .flock {
+    opacity: 0.4;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -22,6 +55,9 @@ html {
     transform: translate(2px, -2px);
   }
 
+  /* Scroll-driven animations: no JavaScript, and browsers without support simply show the page as it is.
+     "backwards" fill means that once an element has arrived, its animation is finished and the browser can
+     stop treating it as animated. */
   @supports (animation-timeline: view()) {
     @keyframes progress {
       from {
@@ -49,15 +85,8 @@ html {
         clip-path: inset(0);
       }
     }
-    @keyframes drift {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(80px);
-      }
-    }
 
+    /* Thin reading-progress line along the top of every page */
     body::before {
       content: "";
       position: fixed;
@@ -70,18 +99,9 @@ html {
       animation-timeline: scroll(root);
     }
 
-    .hero {
-      view-timeline: --hero block;
-      overflow: clip;
-    }
-    .hero-art {
-      animation: drift linear both;
-      animation-timeline: --hero;
-      animation-range: exit 0% exit 100%;
-    }
-
+    /* Principles rise in, one column after the other */
     .principles article > * {
-      animation: rise linear both;
+      animation: rise linear backwards;
       animation-timeline: view();
       animation-range: entry 0% entry 55%;
     }
@@ -92,13 +112,14 @@ html {
       animation-range: entry 16% entry 71%;
     }
 
+    /* The portrait is "developed" from the top down */
     .portrait img {
-      animation: develop linear both;
+      animation: develop linear backwards;
       animation-timeline: view();
       animation-range: entry 0% entry 60%;
     }
     .about-copy {
-      animation: rise linear both;
+      animation: rise linear backwards;
       animation-timeline: view();
       animation-range: entry 10% entry 60%;
     }

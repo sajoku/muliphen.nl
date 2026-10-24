@@ -48,7 +48,11 @@
 }
 html {
   background: var(--bg);
-  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 body {
   margin: 0;
@@ -91,6 +95,24 @@ a:focus-visible {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--line);
+}
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.lang-switch {
+  display: flex;
+  gap: 12px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+.lang-switch a:hover {
+  color: var(--blue);
+}
+.lang-switch [aria-current] {
+  color: var(--ink);
 }
 .brand {
   display: inline-flex;
@@ -149,9 +171,13 @@ h1 {
   letter-spacing: -0.085em;
   font-weight: 500;
 }
+/* The tagline lives inside the h1 (for search engines) but looks the same as before */
 .tagline {
+  display: block;
   margin: 25px 0 0;
   font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 400;
+  line-height: normal;
   letter-spacing: -0.045em;
   color: var(--blue);
 }
@@ -239,6 +265,12 @@ h1 {
   background: var(--blue);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .flock {
+    display: none;
+  }
+}
+
 .principles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -300,7 +332,7 @@ h2 {
 }
 .footer-details {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 240px));
+  grid-template-columns: repeat(2, minmax(0, 240px));
   justify-content: center;
   gap: 40px 32px;
   padding: 40px 0;
@@ -353,11 +385,9 @@ h2 {
   padding-top: 24px;
   border-top: 1px solid var(--line);
 }
-
-@media (max-width: 960px) {
-  .footer-details {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.footer-legal {
+  display: flex;
+  gap: 20px;
 }
 
 @media (max-width: 720px) {
